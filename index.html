@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minha Novelinha — +1.200 Doramas, Novelinhas e Séries Turcas no Telegram</title>
+  <meta name="description" content="Acesse +1.200 doramas coreanos, novelinhas românticas e séries turcas direto no seu Telegram. Alta qualidade, sem travar, acesso vitalício." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================
+       CSS VARIABLES & RESET
+    ============================================ */
+    :root {
+      --terracotta:     #D4614A;
+      --terracotta-dk:  #B8503B;
+      --terracotta-dkk: #9A3F2C;
+      --terracotta-lt:  #E07A65;
+      --cream:          #FFF5ED;
+      --cream-warm:     #FFD4C0;
+      --cream-mid:      #FFEADC;
+      --text-dark:      #3A1F18;
+      --text-mid:       #6B3527;
+      --text-light:     #FFF5ED;
+      --shadow-warm:    rgba(180, 70, 40, 0.18);
+      --font-display:   'Playfair Display', Georgia, serif;
+      --font-body:      'Lato', Arial, sans-serif;
+      --radius-card:    18px;
+      --radius-btn:     50px;
+      --transition:     0.35s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--terracotta);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ============================================
+       SCROLL ANIMATION BASE
+    ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(38px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+    .reveal-delay-3 { transition-delay: 0.34s; }
+    .reveal-delay-4 { transition-delay: 0.46s; }
+
+    /* ============================================
+       SECTION WRAPPERS
+    ============================================ */
+    .section {
+      width: 100%;
+      padding: 72px 24px;
+    }
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+    .section-sub {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      text-align: center;
+      margin-bottom: 48px;
+      opacity: 0.85;
+    }
+
+    /* ============================================
+       ORNAMENTAL DIVIDER
+    ============================================ */
+    .ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 16px auto 0;
+      color: var(--cream-warm);
+      font-size: 0.85rem;
+      letter-spacing: 4px;
+      opacity: 0.7;
+    }
+    .ornament::before,
+    .ornament::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: currentColor;
+      flex-shrink: 1;
+    }
+
+    /* ============================================
+       CTA BUTTON
+    ============================================ */
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 18px 32px;
+      max-width: 100%;
+      box-sizing: border-box;
+      border-radius: var(--radius-btn);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      border: 2px solid var(--cream);
+      transition: background var(--transition), color var(--transition), transform 0.2s ease, box-shadow var(--transition);
+      background: var(--cream);
+      color: var(--terracotta);
+      animation: pulse-cta 2.4s infinite;
+      text-transform: uppercase;
+    }
+    .btn-cta:hover {
+      background: var(--terracotta);
+      color: var(--cream);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.18);
+      animation: none;
+    }
+    .btn-cta:active { transform: translateY(0); }
+
+    @keyframes pulse-cta {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,245,237,0.45); }
+      50%       { box-shadow: 0 0 0 14px rgba(255,245,237,0); }
+    }
+
+    .cta-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: var(--cream-warm);
+      flex-wrap: wrap;
+    }
+    .cta-trust span { display: flex; align-items: center; gap: 4px; }
+
+    /* ============================================
+       SECTION 1 — HERO
+    ============================================ */
+    #hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 72px;
+      background: linear-gradient(160deg, var(--terracotta-dkk) 0%, var(--terracotta) 55%, var(--terracotta-lt) 100%);
+      overflow: hidden;
+    }
+
+    /* Floating hearts */
+    .hearts-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .heart-float {
+      position: absolute;
+      bottom: -60px;
+      font-size: 1.2rem;
+      opacity: 0;
+      animation: float-heart linear infinite;
+      user-select: none;
+    }
+    @keyframes float-heart {
+      0%   { transform: translateY(0) rotate(-8deg) scale(0.8); opacity: 0; }
+      10%  { opacity: 0.45; }
+      90%  { opacity: 0.25; }
+      100% { transform: translateY(-110vh) rotate(12deg) scale(1.1); opacity: 0; }
+    }
+
+    #hero .container { position: relative; z-index: 1; }
+
+    /* Logo / TV icon */
+    .hero-logo {
+      margin: 0 auto 28px;
+    }
+    .tv-icon {
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 16px;
+      position: relative;
+    }
+    .tv-icon svg { width: 100%; height: 100%; }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--cream-warm);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.65rem, 5.5vw, 3.2rem);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 22px;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--cream-warm);
+    }
+
+    .hero-sub {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--cream-warm);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--cream-warm);
+      font-size: 0.75rem;
+      opacity: 0.6;
+      animation: bounce-hint 2s ease infinite;
+    }
+    .hero-scroll-hint svg { width: 20px; height: 20px; }
+    @keyframes bounce-hint {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ============================================
+       SECTION 2 — PAIN POINTS
+    ============================================ */
+    #pain {
+      background: var(--cream);
+    }
+    #pain .section-title { color: var(--terracotta-dkk); }
+    #pain .section-sub   { color: var(--text-mid); }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+    .pain-card {
+      background: var(--cream-mid);
+      border-radius: var(--radius-card);
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 4px 20px var(--shadow-warm);
+      border: 1px solid var(--cream-warm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .pain-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 36px var(--shadow-warm);
+    }
+    .pain-icon {
+      font-size: 2.6rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .pain-card p {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text-dark);
+      line-height: 1.6;
+      font-weight: 400;
+    }
+    .pain-card strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--terracotta-dkk);
+      margin-bottom: 8px;
+    }
+
+    /* ============================================
+       SECTION 3 — GRADE DE CAPAS
+    ============================================ */
+    #covers {
+      background: linear-gradient(170deg, var(--terracotta-dk) 0%, var(--terracotta-dkk) 100%);
+    }
+    #covers .section-title { color: var(--cream); }
+    #covers .section-sub   { color: var(--cream-warm); }
+    #covers .section-sub strong { color: var(--cream); }
+
+    .covers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .cover-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.28);
+      transition: transform var(--transition), box-shadow var(--transition);
+      background: var(--terracotta-dkk);
+    }
+    .cover-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.38);
+    }
+
+    .cover-img {
+      position: relative;
+      aspect-ratio: 2 / 3;
+      width: 100%;
+      overflow: hidden;
+    }
+    .cover-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* placeholder shown when img src is empty */
+    .cover-img img[src=""] { display: none; }
+    .cover-img img[src=""]+.cover-placeholder { display: flex; }
+
+    .cover-placeholder {
+      display: none;
+      position: absolute;
+      inset: 0;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, rgba(154,63,44,0.6) 0%, rgba(90,28,12,0.7) 100%);
+      color: rgba(255,212,192,0.5);
+    }
+    .cover-placeholder svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    footer {
+      background: var(--terracotta-dkk);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .footer-tv {
+      width: 28px;
+      height: 28px;
+    }
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--cream-warm);
+      letter-spacing: 1.5px;
+    }
+    .footer-copy {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: rgba(255,212,192,0.55);
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 0.78rem;
+      color: rgba(255,212,192,0.6);
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--cream-warm); }
+
+    /* ============================================
+       RESPONSIVE TWEAKS
+    ============================================ */
+    @media (max-width: 520px) {
+      .section { padding: 56px 18px; }
+      .pain-card { padding: 24px 18px; }
+      #hero { padding: 72px 20px 64px; }
+      .hero-headline { font-size: clamp(1.45rem, 7vw, 1.85rem); }
+      .btn-cta { font-size: 0.9rem; padding: 15px 22px; width: 100%; }
+      .cta-trust { gap: 10px; font-size: 0.78rem; }
+      .ornament { letter-spacing: 2px; }
+      .covers-grid { gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       SECTION 1 — HERO
+  =========================================== -->
+  <section id="hero">
+
+    <div class="hearts-bg" id="heartsContainer" aria-hidden="true"></div>
+
+    <div class="container">
+
+      <div class="hero-logo reveal">
+        <div class="tv-icon">
+          <svg viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo Minha Novelinha — TV retrô com coração">
+            <!-- Antenas -->
+            <line x1="32" y1="14" x2="20" y2="2" stroke="#FFD4C0" stroke-width="3" stroke-linecap="round"/>
+            <line x1="64" y1="14" x2="76" y2="2" stroke="#FFD4C0" stroke-width="3" stroke-linecap="round"/>
+            <!-- Corpo da TV -->
+            <rect x="8" y="16" width="80" height="56" rx="10" fill="#9A3F2C" stroke="#FFD4C0" stroke-width="2"/>
+            <!-- Tela -->
+            <rect x="16" y="23" width="56" height="40" rx="6" fill="#FFF5ED"/>
+            <!-- Coração na tela -->
+            <path d="M48 53 C48 53 34 44 34 36.5 C34 32 37.5 29 41.5 29 C44.2 29 46.5 30.8 48 33.2 C49.5 30.8 51.8 29 54.5 29 C58.5 29 62 32 62 36.5 C62 44 48 53 48 53Z" fill="#D4614A"/>
+            <!-- Botões laterais -->
+            <circle cx="80" cy="33" r="4" fill="#B8503B"/>
+            <circle cx="80" cy="47" r="4" fill="#B8503B"/>
+            <!-- Pézinhos -->
+            <rect x="30" y="72" width="10" height="8" rx="3" fill="#9A3F2C"/>
+            <rect x="56" y="72" width="10" height="8" rx="3" fill="#9A3F2C"/>
+          </svg>
+        </div>
+        <div class="brand-name">Minha Novelinha</div>
+      </div>
+
+      <h1 class="hero-headline reveal reveal-delay-1">
+        Você sabia que existe um lugar com
+        <em>+1.200 novelinhas</em>
+        esperando por você?
+      </h1>
+
+      <p class="hero-sub reveal reveal-delay-2">
+        Doramas coreanos, novelinhas românticas e séries turcas.
+        Tudo no seu celular, sem travar e sem assinatura cara.
+      </p>
+
+      <div class="reveal reveal-delay-3">
+        <a href="#" class="btn-cta">
+          🌸 Quero conhecer agora
+        </a>
+        <div class="cta-trust">
+          <span>⚡ Acesso imediato</span>
+          <span>🔒 Pagamento seguro</span>
+          <span>💛 +1.200 títulos</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>role para ver mais</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================
+       SECTION 2 — PAIN POINTS
+  =========================================== -->
+  <section id="pain" class="section">
+    <div class="container">
+
+      <h2 class="section-title reveal">Isso acontece com você?</h2>
+      <div class="ornament reveal reveal-delay-1">♥ ♥ ♥</div>
+      <p class="section-sub reveal reveal-delay-2" style="margin-top:20px;">
+        Se você respondeu sim pra qualquer um desses, pode respirar. O seu lugar é aqui.
+      </p>
+
+      <div class="pain-grid">
+
+        <div class="pain-card reveal reveal-delay-1">
+          <span class="pain-icon" aria-hidden="true">🔍</span>
+          <strong>Links que não funcionam</strong>
+          <p>Fica horas procurando link e o vídeo trava na metade, ou pior, some depois de dois episódios.</p>
+        </div>
+
+        <div class="pain-card reveal reveal-delay-2">
+          <span class="pain-icon" aria-hidden="true">😔</span>
+          <strong>Ficando de fora</strong>
+          <p>Todo mundo comenta a novela mas você não encontra pra assistir e acaba spoilada antes de ver.</p>
+        </div>
+
+        <div class="pain-card reveal reveal-delay-3">
+          <span class="pain-icon" aria-hidden="true">💸</span>
+          <strong>Streaming que não entrega</strong>
+          <p>Assina streaming caro todo mês e no final não tem nem a metade do que você quer ver.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       SECTION 3 — GRADE DE CAPAS
+  =========================================== -->
+  <section id="covers" class="section">
+    <div class="container">
+
+      <h2 class="section-title reveal">Olha só o que te espera lá dentro…</h2>
+      <div class="ornament reveal reveal-delay-1" style="color: rgba(255,212,192,0.5);">♥ ♥ ♥</div>
+      <p class="section-sub reveal reveal-delay-2" style="margin-top:20px;">
+        São <strong>+1.200 histórias</strong> esperando por você. Escolhe por onde começa.
+      </p>
+
+      <div class="covers-grid reveal reveal-delay-2">
+
+        <div class="cover-card">
+          <div class="cover-img">
+            <img src="images/capas%20(1).jpg" alt="Capa 1" />
+          </div>
+        </div>
+
+        <div class="cover-card">
+          <div class="cover-img">
+            <img src="images/capas%20(2).jpg" alt="Capa 2" />
+          </div>
+        </div>
+
+        <div class="cover-card">
+          <div class="cover-img">
+            <img src="images/capas%20(3).jpg" alt="Capa 3" />
+          </div>
+        </div>
+
+        <div class="cover-card">
+          <div class="cover-img">
+            <img src="images/capas%20(4).jpg" alt="Capa 4" />
+          </div>
+        </div>
+
+        <div class="cover-card">
+          <div class="cover-img">
+            <img src="images/capas%20(5).jpg" alt="Capa 5" />
+          </div>
+        </div>
+
+        <div class="cover-card">
+          <div class="cover-img">
+            <img src="images/capas%20(6).jpg" alt="Capa 6" />
+          </div>
+        </div>
+
+        <div class="cover-card">
+          <div class="cover-img">
+            <img src="images/capas%20(7).jpg" alt="Capa 7" />
+          </div>
+        </div>
+
+        <div class="cover-card">
+          <div class="cover-img">
+            <img src="images/capas%20(8).jpg" alt="Capa 8" />
+          </div>
+        </div>
+
+        <div class="cover-card">
+          <div class="cover-img">
+            <img src="images/capas%20(9).jpg" alt="Capa 9" />
+          </div>
+        </div>
+
+      </div><!-- /.covers-grid -->
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       FOOTER
+  =========================================== -->
+  <footer>
+    <div class="footer-logo">
+      <svg class="footer-tv" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="8" y="16" width="80" height="56" rx="10" fill="#9A3F2C" stroke="#FFD4C0" stroke-width="2"/>
+        <rect x="16" y="23" width="56" height="40" rx="6" fill="#FFF5ED"/>
+        <path d="M48 53 C48 53 34 44 34 36.5 C34 32 37.5 29 41.5 29 C44.2 29 46.5 30.8 48 33.2 C49.5 30.8 51.8 29 54.5 29 C58.5 29 62 32 62 36.5 C62 44 48 53 48 53Z" fill="#D4614A"/>
+      </svg>
+      <span class="footer-brand">Minha Novelinha</span>
+    </div>
+    <p class="footer-copy">© 2025 Minha Novelinha · Todos os direitos reservados</p>
+    <div class="footer-links">
+      <a href="#">Política de Privacidade</a>
+      <a href="#">Termos de Uso</a>
+      <a href="#">Suporte</a>
+    </div>
+  </footer>
+
+
+  <!-- ==========================================
+       JAVASCRIPT
+  =========================================== -->
+  <script>
+    /* --- Floating hearts in hero --- */
+    (function () {
+      const container = document.getElementById('heartsContainer');
+      const symbols = ['♥', '♡', '❤', '🌸', '✦'];
+      const count = 22;
+
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('span');
+        el.className = 'heart-float';
+        el.setAttribute('aria-hidden', 'true');
+        el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+        const size   = 0.9 + Math.random() * 1.4;
+        const left   = Math.random() * 100;
+        const delay  = Math.random() * 14;
+        const dur    = 10 + Math.random() * 14;
+
+        el.style.cssText = `
+          left: ${left}%;
+          font-size: ${size}rem;
+          animation-duration: ${dur}s;
+          animation-delay: ${delay}s;
+          color: ${Math.random() > 0.5 ? 'rgba(255,212,192,0.55)' : 'rgba(255,245,237,0.4)'};
+        `;
+        container.appendChild(el);
+      }
+    })();
+
+    /* --- Scroll reveal with IntersectionObserver --- */
+    (function () {
+      const targets = document.querySelectorAll('.reveal');
+
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(el => el.classList.add('visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      targets.forEach(el => observer.observe(el));
+    })();
+
+    /* --- Hero elements fire immediately --- */
+    (function () {
+      const heroReveals = document.querySelectorAll('#hero .reveal');
+      heroReveals.forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), 120 + i * 160);
+      });
+    })();
+  </script>
+
+</body>
+</html>
