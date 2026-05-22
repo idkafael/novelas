@@ -380,9 +380,11 @@
       height: 36px;
     }
 
-    .covers-cta {
-      text-align: center;
-      margin-top: 40px;
+    .covers-mid-cta {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: center;
+      padding: 8px 0;
     }
     .btn-cta--telegram {
       background: transparent;
@@ -504,11 +506,6 @@
         <a href="#covers" class="btn-cta">
           🌸 Quero conhecer agora
         </a>
-        <div class="cta-trust">
-          <span>Acesso imediato</span>
-          <span>Pagamento seguro</span>
-          <span>+1.200 títulos</span>
-        </div>
       </div>
 
     </div>
@@ -592,6 +589,12 @@
           </div>
         </div>
 
+        <div class="covers-mid-cta">
+          <a href="https://t.me/SEU_LINK_AQUI" target="_blank" rel="noopener" class="btn-cta btn-cta--telegram">
+            🌸 Quero acessar agora
+          </a>
+        </div>
+
         <div class="cover-card">
           <div class="cover-img">
             <img src="images/capas%20(4).jpg" alt="Capa 4" />
@@ -629,12 +632,6 @@
         </div>
 
       </div><!-- /.covers-grid -->
-
-      <div class="covers-cta reveal reveal-delay-3">
-        <a href="https://t.me/SEU_LINK_AQUI" target="_blank" rel="noopener" class="btn-cta btn-cta--telegram">
-          Quero acessar no Telegram
-        </a>
-      </div>
 
     </div>
   </section>
