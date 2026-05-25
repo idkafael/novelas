@@ -185,6 +185,8 @@
       margin: 32px auto 36px;
       width: 100%;
       max-width: 360px;
+      position: relative;
+      cursor: pointer;
     }
     .vsl-wrapper video {
       width: 100%;
@@ -193,6 +195,46 @@
       box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
       display: block;
       background: #000;
+    }
+
+    /* Overlay de play/pause */
+    .vsl-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+    .vsl-play-btn {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(255, 245, 237, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease, opacity 0.25s ease;
+    }
+    .vsl-play-btn svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--terracotta);
+      margin-left: 4px; /* visual center do triângulo */
+    }
+    .vsl-wrapper:hover .vsl-play-btn {
+      transform: scale(1.1);
+    }
+    /* Esconde overlay quando o vídeo está tocando */
+    .vsl-wrapper.playing .vsl-overlay {
+      opacity: 0;
+    }
+    /* Mostra brevemente ao pausar */
+    .vsl-wrapper.paused .vsl-overlay {
+      opacity: 1;
     }
 
     /* Floating hearts */
@@ -513,13 +555,22 @@
         esperando por você?
       </h1>
 
-      <div class="vsl-wrapper reveal reveal-delay-2">
+      <div class="vsl-wrapper paused reveal reveal-delay-2" id="vslWrapper">
         <video
+          id="vslVideo"
           src="images/vsl%20novelas.mp4"
           controls
           playsinline
           preload="metadata"
         ></video>
+        <div class="vsl-overlay">
+          <div class="vsl-play-btn">
+            <!-- ícone play -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+        </div>
       </div>
 
       <p class="hero-sub reveal reveal-delay-3">
@@ -742,6 +793,38 @@
       buildTrack(document.getElementById('carouselTrack1'), covers1);
       buildTrack(document.getElementById('carouselTrack2'), set2);
 
+    })();
+
+    /* --- VSL play/pause ao clicar em qualquer lugar --- */
+    (function () {
+      const wrapper = document.getElementById('vslWrapper');
+      const video   = document.getElementById('vslVideo');
+      if (!wrapper || !video) return;
+
+      function sync() {
+        if (video.paused) {
+          wrapper.classList.remove('playing');
+          wrapper.classList.add('paused');
+        } else {
+          wrapper.classList.remove('paused');
+          wrapper.classList.add('playing');
+        }
+      }
+
+      // Clique em qualquer área do wrapper
+      wrapper.addEventListener('click', function (e) {
+        // Não interfere com os controles nativos (barra inferior ~56px)
+        const rect = wrapper.getBoundingClientRect();
+        const fromBottom = rect.bottom - e.clientY;
+        if (fromBottom < 60) return;
+
+        e.preventDefault();
+        video.paused ? video.play() : video.pause();
+      });
+
+      video.addEventListener('play',  sync);
+      video.addEventListener('pause', sync);
+      video.addEventListener('ended', sync);
     })();
 
     /* --- Hero elements fire immediately --- */
