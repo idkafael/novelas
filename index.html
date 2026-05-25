@@ -197,42 +197,54 @@
       background: #000;
     }
 
-    /* Overlay de play/pause */
+    /* Área de toque transparente — fica acima do vídeo, abaixo dos controles */
+    .vsl-tap-area {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 56px; /* reserva espaço da barra de controles nativa */
+      border-radius: 20px 20px 0 0;
+      z-index: 3;
+      cursor: pointer;
+    }
+
+    /* Overlay de play/pause (ícone visual) */
     .vsl-overlay {
       position: absolute;
       inset: 0;
+      bottom: 56px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 20px;
+      border-radius: 20px 20px 0 0;
       transition: opacity 0.25s ease;
       pointer-events: none;
+      z-index: 2;
     }
     .vsl-play-btn {
-      width: 72px;
-      height: 72px;
+      width: 76px;
+      height: 76px;
       border-radius: 50%;
       background: rgba(255, 245, 237, 0.92);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-      transition: transform 0.2s ease, opacity 0.25s ease;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.45);
+      transition: transform 0.2s ease;
     }
     .vsl-play-btn svg {
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       fill: var(--terracotta);
-      margin-left: 4px; /* visual center do triângulo */
+      margin-left: 5px;
     }
-    .vsl-wrapper:hover .vsl-play-btn {
+    .vsl-tap-area:hover .vsl-play-btn {
       transform: scale(1.1);
     }
-    /* Esconde overlay quando o vídeo está tocando */
     .vsl-wrapper.playing .vsl-overlay {
       opacity: 0;
     }
-    /* Mostra brevemente ao pausar */
     .vsl-wrapper.paused .vsl-overlay {
       opacity: 1;
     }
@@ -563,9 +575,11 @@
           playsinline
           preload="metadata"
         ></video>
+        <!-- área de toque (captura o clique antes do vídeo) -->
+        <div class="vsl-tap-area" id="vslTapArea"></div>
+        <!-- ícone visual de play/pause -->
         <div class="vsl-overlay">
           <div class="vsl-play-btn">
-            <!-- ícone play -->
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M8 5v14l11-7z"/>
             </svg>
@@ -798,8 +812,9 @@
     /* --- VSL play/pause ao clicar em qualquer lugar --- */
     (function () {
       const wrapper = document.getElementById('vslWrapper');
+      const tapArea = document.getElementById('vslTapArea');
       const video   = document.getElementById('vslVideo');
-      if (!wrapper || !video) return;
+      if (!wrapper || !tapArea || !video) return;
 
       function sync() {
         if (video.paused) {
@@ -811,14 +826,8 @@
         }
       }
 
-      // Clique em qualquer área do wrapper
-      wrapper.addEventListener('click', function (e) {
-        // Não interfere com os controles nativos (barra inferior ~56px)
-        const rect = wrapper.getBoundingClientRect();
-        const fromBottom = rect.bottom - e.clientY;
-        if (fromBottom < 60) return;
-
-        e.preventDefault();
+      // Clique na tap-area (div transparente acima do vídeo)
+      tapArea.addEventListener('click', function () {
         video.paused ? video.play() : video.pause();
       });
 
