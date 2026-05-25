@@ -171,14 +171,28 @@
     ============================================ */
     #hero {
       position: relative;
-      min-height: 100svh;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       text-align: center;
-      padding: 80px 24px 72px;
+      padding: 64px 24px 72px;
       background: linear-gradient(160deg, var(--terracotta-dkk) 0%, var(--terracotta) 55%, var(--terracotta-lt) 100%);
       overflow: hidden;
+    }
+
+    /* VSL — vídeo vertical */
+    .vsl-wrapper {
+      margin: 32px auto 36px;
+      width: 100%;
+      max-width: 360px;
+    }
+    .vsl-wrapper video {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      border-radius: 20px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+      display: block;
+      background: #000;
     }
 
     /* Floating hearts */
@@ -322,69 +336,70 @@
     }
 
     /* ============================================
-       SECTION 3 — GRADE DE CAPAS
+       SECTION 3 — CARROSSEL DE CAPAS
     ============================================ */
     #covers {
       background: linear-gradient(170deg, var(--terracotta-dk) 0%, var(--terracotta-dkk) 100%);
+      padding-left: 0;
+      padding-right: 0;
+    }
+    #covers .container {
+      padding-left: 24px;
+      padding-right: 24px;
     }
     #covers .section-title { color: var(--cream); }
     #covers .section-sub   { color: var(--cream-warm); }
     #covers .section-sub strong { color: var(--cream); }
 
-    .covers-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .cover-card {
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.28);
-      transition: transform var(--transition), box-shadow var(--transition);
-      background: var(--terracotta-dkk);
-    }
-    .cover-card:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 14px 36px rgba(0,0,0,0.38);
-    }
-
-    .cover-img {
-      position: relative;
-      aspect-ratio: 2 / 3;
+    /* Faixa do carrossel — largura total */
+    .carousel-outer {
       width: 100%;
       overflow: hidden;
+      padding: 20px 0 28px;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
     }
-    .cover-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+
+    .carousel-track {
+      display: flex;
+      gap: 14px;
+      width: max-content;
+      animation: carousel-scroll 38s linear infinite;
+      will-change: transform;
+    }
+    .carousel-track--reverse {
+      animation-direction: reverse;
+    }
+    .carousel-track:hover { animation-play-state: paused; }
+
+    @keyframes carousel-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .carousel-card {
+      flex-shrink: 0;
+      width: 150px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .carousel-card:hover {
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.55);
+    }
+    .carousel-card img {
       display: block;
-    }
-    /* placeholder shown when img src is empty */
-    .cover-img img[src=""] { display: none; }
-    .cover-img img[src=""]+.cover-placeholder { display: flex; }
-
-    .cover-placeholder {
-      display: none;
-      position: absolute;
-      inset: 0;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(145deg, rgba(154,63,44,0.6) 0%, rgba(90,28,12,0.7) 100%);
-      color: rgba(255,212,192,0.5);
-    }
-    .cover-placeholder svg {
-      width: 36px;
-      height: 36px;
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
     }
 
-    .covers-mid-cta {
-      grid-column: 1 / -1;
+    .covers-cta {
       display: flex;
       justify-content: center;
-      padding: 8px 0;
+      padding: 8px 24px 0;
     }
     .btn-cta--telegram {
       background: transparent;
@@ -448,8 +463,9 @@
     @media (max-width: 520px) {
       .section { padding: 56px 18px; }
       .pain-card { padding: 24px 18px; }
-      #hero { padding: 72px 20px 64px; }
+      #hero { padding: 52px 16px 60px; }
       .hero-headline { font-size: clamp(1.45rem, 7vw, 1.85rem); }
+      .vsl-wrapper { max-width: 100%; }
       .btn-cta { font-size: 0.9rem; padding: 15px 22px; width: 100%; }
       .cta-trust { gap: 10px; font-size: 0.78rem; }
       .ornament { letter-spacing: 2px; }
@@ -497,7 +513,16 @@
         esperando por você?
       </h1>
 
-      <p class="hero-sub reveal reveal-delay-2">
+      <div class="vsl-wrapper reveal reveal-delay-2">
+        <video
+          src="images/vsl%20novelas.mp4"
+          controls
+          playsinline
+          preload="metadata"
+        ></video>
+      </div>
+
+      <p class="hero-sub reveal reveal-delay-3">
         Doramas coreanos, novelinhas românticas e séries turcas.
         Tudo no seu celular, sem travar e sem assinatura cara.
       </p>
@@ -558,82 +583,34 @@
 
 
   <!-- ==========================================
-       SECTION 3 — GRADE DE CAPAS
+       SECTION 3 — CARROSSEL DE CAPAS
   =========================================== -->
   <section id="covers" class="section">
-    <div class="container">
 
+    <div class="container">
       <h2 class="section-title reveal">Olha só o que te espera lá dentro…</h2>
       <div class="ornament reveal reveal-delay-1" style="color: rgba(255,212,192,0.5);">♥ ♥ ♥</div>
       <p class="section-sub reveal reveal-delay-2" style="margin-top:20px;">
         São <strong>+1.200 histórias</strong> esperando por você. Escolhe por onde começa.
       </p>
-
-      <div class="covers-grid reveal reveal-delay-2">
-
-        <div class="cover-card">
-          <div class="cover-img">
-            <img src="images/capas%20(1).jpg" alt="Capa 1" />
-          </div>
-        </div>
-
-        <div class="cover-card">
-          <div class="cover-img">
-            <img src="images/capas%20(2).jpg" alt="Capa 2" />
-          </div>
-        </div>
-
-        <div class="cover-card">
-          <div class="cover-img">
-            <img src="images/capas%20(3).jpg" alt="Capa 3" />
-          </div>
-        </div>
-
-        <div class="covers-mid-cta">
-          <a href="https://t.me/SEU_LINK_AQUI" target="_blank" rel="noopener" class="btn-cta btn-cta--telegram">
-            🌸 Quero acessar agora
-          </a>
-        </div>
-
-        <div class="cover-card">
-          <div class="cover-img">
-            <img src="images/capas%20(4).jpg" alt="Capa 4" />
-          </div>
-        </div>
-
-        <div class="cover-card">
-          <div class="cover-img">
-            <img src="images/capas%20(5).jpg" alt="Capa 5" />
-          </div>
-        </div>
-
-        <div class="cover-card">
-          <div class="cover-img">
-            <img src="images/capas%20(6).jpg" alt="Capa 6" />
-          </div>
-        </div>
-
-        <div class="cover-card">
-          <div class="cover-img">
-            <img src="images/capas%20(7).jpg" alt="Capa 7" />
-          </div>
-        </div>
-
-        <div class="cover-card">
-          <div class="cover-img">
-            <img src="images/capas%20(8).jpg" alt="Capa 8" />
-          </div>
-        </div>
-
-        <div class="cover-card">
-          <div class="cover-img">
-            <img src="images/capas%20(9).jpg" alt="Capa 9" />
-          </div>
-        </div>
-
-      </div><!-- /.covers-grid -->
-
     </div>
+
+    <!-- Carrossel 1 — capas 1 a 10 (esquerda) -->
+    <div class="carousel-outer reveal reveal-delay-2">
+      <div class="carousel-track" id="carouselTrack1"></div>
+    </div>
+
+    <!-- Carrossel 2 — capas 11 a 20 (direita) -->
+    <div class="carousel-outer reveal reveal-delay-3">
+      <div class="carousel-track carousel-track--reverse" id="carouselTrack2"></div>
+    </div>
+
+    <div class="covers-cta reveal reveal-delay-3">
+      <a href="https://checkout.appcnpay.com/checkout/cmplpmoib00h901rzq5yvw3nc?offer=F30SSN1" target="_blank" rel="noopener" class="btn-cta btn-cta--telegram">
+        🌸 Quero acessar agora
+      </a>
+    </div>
+
   </section>
 
 
@@ -709,6 +686,70 @@
       }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
       targets.forEach(el => observer.observe(el));
+    })();
+
+    /* --- Carrosseis de capas --- */
+    (function () {
+
+      // Carrossel 1 — capas 1 a 14
+      const covers1 = [
+        'images/capas%20%281%29.jpg',
+        'images/capas%20%282%29.jpg',
+        'images/capas%20%283%29.jpg',
+        'images/capas%20%284%29.jpg',
+        'images/capas%20%285%29.jpg',
+        'images/capas%20%286%29.jpg',
+        'images/capas%20%287%29.jpg',
+        'images/capas%20%288%29.jpg',
+        'images/capas%20%289%29.jpg',
+        'images/capas%20%2810%29.jpg',
+        'images/capas%20%2811%29.jpg',
+        'images/capas%20%2812%29.jpg',
+        'images/capas%20%2813%29.jpg',
+        'images/capas%20%2814%29.jpg',
+      ];
+
+      // Carrossel 2 — capas 15 a 28
+      const covers2 = [
+        'images/capas%20%2815%29.jpg',
+        'images/capas%20%2816%29.jpg',
+        'images/capas%20%2817%29.jpg',
+        'images/capas%20%2818%29.jpg',
+        'images/capas%20%2819%29.jpg',
+        'images/capas%20%2820%29.jpg',
+        'images/capas%20%2821%29.jpg',
+        'images/capas%20%2822%29.jpg',
+        'images/capas%20%2823%29.jpg',
+        'images/capas%20%2824%29.jpg',
+        'images/capas%20%2825%29.jpg',
+        'images/capas%20%2826%29.jpg',
+        'images/capas%20%2827%29.jpg',
+        'images/capas%20%2828%29.jpg',
+      ];
+
+      const set2 = covers2;
+
+      function buildTrack(trackEl, covers) {
+        if (!trackEl) return;
+        // Duplica para loop contínuo
+        [...covers, ...covers].forEach((src, i) => {
+          const card = document.createElement('div');
+          card.className = 'carousel-card';
+          if (i >= covers.length) card.setAttribute('aria-hidden', 'true');
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = 'Capa ' + ((i % covers.length) + 1);
+          img.loading = 'eager';
+          card.appendChild(img);
+          trackEl.appendChild(card);
+        });
+        const duration = Math.max(28, covers.length * 4);
+        trackEl.style.animationDuration = duration + 's';
+      }
+
+      buildTrack(document.getElementById('carouselTrack1'), covers1);
+      buildTrack(document.getElementById('carouselTrack2'), set2);
+
     })();
 
     /* --- Hero elements fire immediately --- */
