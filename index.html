@@ -396,6 +396,7 @@
       background: linear-gradient(170deg, var(--terracotta-dk) 0%, var(--terracotta-dkk) 100%);
       padding-left: 0;
       padding-right: 0;
+      padding-bottom: 28px;
     }
     #covers .container {
       padding-left: 24px;
@@ -464,6 +465,216 @@
     .btn-cta--telegram:hover {
       background: var(--cream);
       color: var(--terracotta);
+    }
+
+    /* ============================================
+       SECTION — PLANOS
+    ============================================ */
+    #planos {
+      background: linear-gradient(160deg, var(--terracotta-dkk) 0%, #7D2F1C 100%);
+      text-align: center;
+      padding-top: 36px;
+    }
+    #planos .section-title { color: var(--cream); }
+    #planos .section-sub   { color: var(--cream-warm); margin-bottom: 36px; }
+
+    .planos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Card base */
+    .plano-card {
+      border-radius: 20px;
+      padding: 28px 22px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+    }
+
+    /* Plano teste — discreto */
+    .plano-card--teste {
+      background: rgba(255,245,237,0.07);
+      border: 1px solid rgba(255,212,192,0.2);
+    }
+    .plano-card--teste .plano-nome {
+      color: var(--cream-warm);
+      font-size: 0.95rem;
+    }
+    .plano-card--teste .plano-preco-valor {
+      font-size: 2.4rem;
+    }
+
+    /* Plano vitalício — destaque */
+    .plano-card--vitali {
+      background: var(--cream);
+      border: 2px solid var(--cream-warm);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+      transform: scale(1.03);
+    }
+    .plano-card--vitali .plano-nome  { color: var(--terracotta-dkk); }
+    .plano-card--vitali .plano-desc  { color: var(--text-mid); }
+    .plano-card--vitali .plano-preco { color: var(--terracotta-dkk); }
+    .plano-card--vitali .plano-preco-valor { font-size: 3rem; color: var(--terracotta); }
+    .plano-card--vitali .plano-lista { color: var(--text-dark); }
+
+    /* Badge */
+    .plano-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--terracotta);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+    .plano-card--teste .plano-badge {
+      background: rgba(255,212,192,0.18);
+      color: var(--cream-warm);
+      border: 1px solid rgba(255,212,192,0.3);
+    }
+
+    .plano-nome {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+    .plano-desc {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      color: var(--cream-warm);
+      line-height: 1.5;
+      margin-top: -6px;
+    }
+    .plano-preco {
+      color: var(--cream-warm);
+      line-height: 1;
+    }
+    .plano-preco-label {
+      font-size: 0.78rem;
+      font-family: var(--font-body);
+      display: block;
+      margin-bottom: 4px;
+      opacity: 0.8;
+    }
+    .plano-preco-valor {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 5px;
+      line-height: 1;
+    }
+    .plano-preco-currency {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--cream);
+    }
+    .plano-preco-number {
+      font-family: var(--font-body);
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: -1px;
+    }
+    .plano-card--vitali .plano-preco-currency { color: var(--terracotta); }
+    .plano-card--vitali .plano-preco-number   { font-size: 3.2rem; color: var(--terracotta); }
+    .plano-lista {
+      list-style: none;
+      text-align: left;
+      width: 100%;
+      color: var(--cream-warm);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .plano-lista li::before {
+      content: '✓ ';
+      font-weight: 700;
+      color: var(--terracotta);
+    }
+    .plano-card--vitali .plano-lista li::before {
+      color: var(--terracotta);
+    }
+    .plano-divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(255,212,192,0.15);
+    }
+    .plano-card--vitali .plano-divider {
+      background: rgba(180,70,40,0.15);
+    }
+
+    .plano-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 50px;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition), transform 0.2s ease;
+      text-decoration: none;
+    }
+    .plano-card--teste .plano-btn {
+      background: transparent;
+      color: var(--cream-warm);
+      border: 1.5px solid rgba(255,212,192,0.4);
+    }
+    .plano-card--teste .plano-btn:hover {
+      background: rgba(255,245,237,0.1);
+    }
+    .plano-card--vitali .plano-btn {
+      background: var(--terracotta);
+      color: var(--cream);
+      border: none;
+      animation: pulse-cta 2.4s infinite;
+      font-size: 0.92rem;
+    }
+    .plano-card--vitali .plano-btn:hover {
+      background: var(--terracotta-dkk);
+      transform: translateY(-2px);
+      animation: none;
+    }
+
+    .plano-garantia {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: var(--text-mid);
+      margin-top: -6px;
+    }
+
+    @media (max-width: 520px) {
+      .planos-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+      .plano-card--vitali {
+        transform: scale(1);
+        order: -1; /* vitalício aparece primeiro no mobile */
+      }
     }
 
     /* ============================================
@@ -670,12 +881,76 @@
       <div class="carousel-track carousel-track--reverse" id="carouselTrack2"></div>
     </div>
 
-    <div class="covers-cta reveal reveal-delay-3">
-      <a href="https://checkout.appcnpay.com/checkout/cmplpmoib00h901rzq5yvw3nc?offer=F30SSN1" target="_blank" rel="noopener" class="btn-cta btn-cta--telegram">
-        🌸 Quero acessar agora
-      </a>
-    </div>
+  </section>
 
+
+  <!-- ==========================================
+       SECTION — PLANOS
+  =========================================== -->
+  <section id="planos" class="section">
+    <div class="container">
+
+      <h2 class="section-title reveal">Escolhe como quer entrar</h2>
+      <div class="ornament reveal reveal-delay-1" style="color:rgba(255,212,192,0.35);">♥ ♥ ♥</div>
+      <p class="section-sub reveal reveal-delay-2" style="margin-top:18px;">
+        Teste antes ou entra de vez. A escolha é sua.
+      </p>
+
+      <div class="planos-grid">
+
+        <!-- PLANO TESTE -->
+        <div class="plano-card plano-card--teste reveal reveal-delay-2">
+          <div class="plano-badge">7 dias</div>
+          <div class="plano-nome">Acesso Teste</div>
+          <p class="plano-desc">Experimenta por uma semana antes de decidir.</p>
+          <div class="plano-divider"></div>
+          <div class="plano-preco">
+            <span class="plano-preco-label">por apenas</span>
+            <div class="plano-preco-valor">
+              <span class="plano-preco-currency">R$</span>
+              <span class="plano-preco-number">10,00</span>
+            </div>
+          </div>
+          <ul class="plano-lista">
+            <li>Acesso por 7 dias</li>
+            <li>+1.200 títulos disponíveis</li>
+            <li>Alta qualidade, sem travar</li>
+          </ul>
+          <a href="https://checkout.appcnpay.com/checkout/cmplrik1b05dx01qek3pfqm9t?offer=6EBUD3N" target="_blank" rel="noopener" class="plano-btn">Quero testar</a>
+        </div>
+
+        <!-- PLANO VITALÍCIO -->
+        <div class="plano-card plano-card--vitali reveal reveal-delay-3">
+          <div class="plano-badge">Mais escolhido</div>
+          <div class="plano-nome">Acesso Vitalício</div>
+          <p class="plano-desc">Vitalício = pra sempre. Paga uma vez e nunca mais precisa pagar.</p>
+          <div class="plano-divider"></div>
+          <div class="plano-preco">
+            <span class="plano-preco-label" style="color:var(--text-mid);">por apenas</span>
+            <div class="plano-preco-valor">
+              <span class="plano-preco-currency">R$</span>
+              <span class="plano-preco-number">24,90</span>
+            </div>
+          </div>
+          <ul class="plano-lista">
+            <li>Acesso pra sempre, não vence nunca</li>
+            <li>+1.200 doramas, novelinhas, séries turcas e tailandesas</li>
+            <li>Alta qualidade, sem travar</li>
+            <li>Novelinhas novas todo dia</li>
+            <li>Sem anúncio interrompendo na melhor cena</li>
+            <li>Sem mensalidade, sem cobrança surpresa no cartão</li>
+            <li>Não precisa ficar procurando em vários sites</li>
+            <li>Sem precisar criar conta em streaming nenhum</li>
+            <li>Liberação imediata após o pagamento</li>
+          </ul>
+          <a href="https://checkout.appcnpay.com/checkout/cmplpmoib00h901rzq5yvw3nc?offer=F30SSN1"
+             target="_blank" rel="noopener"
+             class="plano-btn">🌸 Quero acesso vitalício</a>
+          <span class="plano-garantia">⚡ Liberação imediata após o pagamento</span>
+        </div>
+
+      </div>
+    </div>
   </section>
 
 
